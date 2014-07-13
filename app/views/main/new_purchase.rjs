@@ -1,0 +1,8 @@
+page.replace_html "errorMessages", error_messages_for('purchase')
+page.replace_html "flash", flash[:notice]
+if @balance
+	page.replace_html "balance_#{@balance.id}", dollar_value(@balance.balance)
+	page.visual_effect :pulsate, "balance_#{@balance.id}", :duration => 1.0
+	page.replace_html "details", "" 
+	page << "$('theform').reset();"
+end

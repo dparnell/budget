@@ -1,0 +1,15 @@
+<html>
+<head>
+  <title>Expenses: <%= controller.action_name %> - Current period from <%= @period.start_date.strftime('%A %B %d %Y') %> to <%= @period.end_date.strftime('%A %B %d %Y') %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<p style="color: green; float: right" id="flash"><%= flash[:notice] %></p>
+
+<%= yield %>
+
+</body>
+</html>

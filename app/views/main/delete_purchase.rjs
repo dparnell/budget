@@ -1,0 +1,3 @@
+page.visual_effect :puff, "purchase_#{@purchase.id}"
+page.replace_html "balance_#{@balance.id}", dollar_value(@balance.balance)
+page.visual_effect :pulsate, "balance_#{@balance.id}", :duration => 1.0

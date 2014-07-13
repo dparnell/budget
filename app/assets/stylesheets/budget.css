@@ -1,0 +1,63 @@
+.positive {
+	color: #000000;
+}
+
+.negative {
+	color: #ff0000;
+}
+
+.dollar {
+	text-align: right;
+}
+
+.total {
+	background-color: #aaa;
+}
+
+.left_part {
+	float: left;
+}
+
+.right_part {
+	height: 100%;
+	overflow: scroll;
+}
+
+#details {
+	border: solid 1px #000000;
+	float: right;
+}
+
+.table_header {
+	background-color: #333;
+	color: #fff;
+}
+
+.table_row0 {
+	
+}
+
+.table_row1 {
+	background-color: #ffffcc;
+}
+
+div.auto_complete {
+  position:absolute;
+  width:250px;
+  background-color:white;
+  border:1px solid #888;
+  margin:0px;
+  padding:0px;
+}
+ul.autocomplete_list  {
+  list-style-type: none;
+  margin:0px;
+  padding:0px;
+}
+ul.autocomplete_list li.selected { background-color: #ffb; }
+li.autocomplete_item {
+  list-style-type: none;
+  display:block;
+  margin:0;
+  padding:2px;
+}
