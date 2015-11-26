@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $.datepicker.setDefaults({dateFormat: 'yy-mm-dd'});
 
     $('.balance-detail').click(function(event) {
         $.ajax($(this).attr('href')).done(function(data) {

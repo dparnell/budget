@@ -34,7 +34,9 @@ class ExpensesController < ApplicationController
 
   def update
     @expense = Expense.find(params[:id])
-    if @expense.update_attributes(params[:expense])
+    @expense.name = params[:expense][:name]
+    @expense.budget = params[:expense][:budget]
+    if @expense.save
       flash[:notice] = 'Expense was successfully updated.'
       redirect_to :action => 'show', :id => @expense
     else

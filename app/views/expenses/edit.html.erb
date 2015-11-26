@@ -1,9 +1,9 @@
 <h1>Editing expense</h1>
 
-<%= form_tag :action => 'update', :id => @expense %>
+<%= form_for @expense, :method => :put do %>
   <%= render :partial => 'form' %>
   <%= submit_tag 'Edit' %>
-</form>
+<% end %>
 
 <%= link_to 'Show', :action => 'show', :id => @expense %> |
 <%= link_to 'Back', :action => 'index' %>

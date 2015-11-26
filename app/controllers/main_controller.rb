@@ -17,12 +17,15 @@ class MainController < ApplicationController
     if @purchase.save
       flash[:notice] = 'Purchase was successfully entered.'
       @balance = Period.currentPeriod.balances.where(:expense_id => @purchase.expense.id).first
+      redirect_to '/'
     else
       @balance = nil
-      flash[:notice] = ''
-    end
+      @period = Period.currentPeriod
+      @balances = @period.balances
+      flash[:alert] = @purchase.errors.full_messages.join(".\n")
 
-    redirect_to '/'
+      render :index
+    end
   end
 
   def balance_details
@@ -50,7 +53,7 @@ class MainController < ApplicationController
   def auto_complete_for_purchase_description
     @items = Purchase.find_by_sql ["select distinct description value from purchases where lower(description) like ? order by description", '%'+params[:term]+'%']
 
-		render :json => @items
+    render :json => @items
   end
 
 end
