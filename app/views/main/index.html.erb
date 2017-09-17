@@ -1,71 +1,93 @@
 <span class="left_part">
-  <table>
-    <tr class="table_header">
-      <th>Category</th>
-      <th>Budget</th>
-      <th>Balance</th>
-    </tr>
-    <%
-    total_budget = 0
-    total_balance = 0
-
-    i = 0
-    for balance in @balances
-      total_budget = total_budget + balance.budget
-      total_balance = total_balance + balance.balance
-
-      if balance.expense
-    %>
-    <tr class="table_row<%= i & 1 %>">
-      <td><%= link_to balance.expense.name, "/balance_details/#{balance.id}", :class => 'balance-detail' %></td>
-      <td class="dollar" id="budget_<%= balance.id %>"><%= formatted_dollar_value(balance.budget) %></td>
-        <td class="dollar" id="balance_<%= balance.id %>"><%= dollar_value(balance.balance) %></td>
-    </tr>
-    <%      i = i + 1
-  end
-end %>
-    <tr class="total">
-      <td><b>Total</b></td>
-      <td class="dollar"><%= formatted_dollar_value(total_budget) %></td>
-        <td class="dollar"><%= dollar_value(total_balance) %></td>
-    </tr>
-  </table>
-
-  <h3>New Purchase</h3>
-  <div id="errorMessages"></div>
-  <%= form_tag %>
     <table>
-      <tr>
-        <td>Category:</td>
-        <td>
-          <%= select("purchase", "expense_id", (@balances.collect {|b| if b.expense then [ b.expense.name, b.expense.id ] else nil end }).compact) %>
-        </td>
-      </tr>
-      <tr>
-        <td>Entered By:</td>
-        <td><%= text_field 'purchase', 'entered_by' %></td>
-      </tr>
-      <tr>
-        <td>Description:</td>
-        <td><%= text_field 'purchase', 'description' %></td>
-      </tr>
-      <tr>
-        <td>Amount:</td>
-        <td><%= text_field 'purchase', 'amount' %></td>
-      </tr>
-      <tr>
-        <td>Date Purchased:</td>
-        <td><%= text_field 'purchase', 'purchase_date', :value => Date.today.to_s %> </td>
-      </tr>
-      <tr>
-        <td colspan="2" align="right">
-          <%= submit_tag "submit" %>
-        </td>
-      </tr>
+        <tr class="table_header">
+            <th>Category</th>
+            <th>Budget</th>
+            <th>Balance</th>
+        </tr>
+        <%
+        total_budget = 0
+        total_balance = 0
+
+        i = 0
+        for balance in @balances
+            total_budget = total_budget + balance.budget
+            total_balance = total_balance + balance.balance
+
+            if balance.expense
+        %>
+        <tr class="table_row<%= i & 1 %>">
+            <td><%= link_to balance.expense.name, "/balance_details/#{balance.id}", :class => 'balance-detail' %></td>
+            <td class="dollar" id="budget_<%= balance.id %>"><%= formatted_dollar_value(balance.budget) %></td>
+            <td class="dollar" id="balance_<%= balance.id %>"><%= dollar_value(balance.balance) %></td>
+        </tr>
+        <%      i = i + 1
+        end
+        end %>
+        <tr class="total">
+            <td><b>Total</b></td>
+            <td class="dollar"><%= formatted_dollar_value(total_budget) %></td>
+            <td class="dollar"><%= dollar_value(total_balance) %></td>
+        </tr>
+    </table>
+
+    <h3>New Purchase</h3>
+    <div id="errorMessages"></div>
+    <%= form_tag %>
+    <table>
+        <tr>
+            <td>Category:</td>
+            <td>
+                <%= select("purchase", "expense_id", (@balances.collect {|b| if b.expense then [ b.expense.name, b.expense.id ] else nil end }).compact) %>
+            </td>
+        </tr>
+        <tr>
+            <td>Entered By:</td>
+            <td><%= text_field 'purchase', 'entered_by' %></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><%= text_field 'purchase', 'description' %></td>
+        </tr>
+        <tr>
+            <td>Amount:</td>
+            <td><%= text_field 'purchase', 'amount' %></td>
+        </tr>
+        <tr>
+            <td>Date Purchased:</td>
+            <td><%= text_field 'purchase', 'purchase_date', :value => Date.today.to_s %> </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                <%= submit_tag "submit" %>
+            </td>
+        </tr>
     </table>
   </form>
 </span>
 
+<span class="recent-purchases">
+    <table>
+        <tr class="table_header">
+            <th>Category</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Entered By</th>
+        </tr>
+
+        <% @recent_purchases.each do |p|%>
+            <tr>
+                <td><%= p.expense.name %></td>
+                <td><%= p.purchase_date %></td>
+                <td class="dollar"><%= formatted_dollar_value(p.amount) %></td>
+                <td><%= p.description %></td>
+                <td><%= p.entered_by %></td>
+            </tr>
+        <% end %>
+    </table>
+</span>
+
 <span class="right_part">
-  <div id="details"></div>
+    <div id="details"></div>
 </span>

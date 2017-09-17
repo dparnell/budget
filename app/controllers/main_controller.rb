@@ -9,7 +9,8 @@ class MainController < ApplicationController
       @period = Period.currentPeriod
     end
 
-    @balances = @period.balances
+    @balances = @period.balances.joins(:expense).order('lower(expenses.name)')
+    @recent_purchases = Purchase.joins(:expense).order('purchase_date desc').limit(25)
   end
 
   def new_purchase

@@ -25,7 +25,9 @@
 
 #details {
 	border: solid 1px #000000;
-	float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .table_header {
@@ -34,7 +36,7 @@
 }
 
 .table_row0 {
-	
+
 }
 
 .table_row1 {
